@@ -2,7 +2,7 @@ const puppeteer = require('puppeteer');
 const { overrideConsoleLog } = require('./utils/logger.js');
 
 async function main() {
-    await overrideConsoleLog();
+    overrideConsoleLog();
 
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
