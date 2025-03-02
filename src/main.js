@@ -1,16 +1,24 @@
-import puppeteer from 'puppeteer';
+const puppeteer = require('puppeteer');
+const { overrideConsoleLog } = require('./utils/logger.js');
 
-const browser = await puppeteer.launch();
-const page = await browser.newPage();
+async function main() {
+    await overrideConsoleLog();
 
-await page.goto('https://developer.chrome.com/');
-await page.setViewport({width: 1080, height: 1024});
-await page.locator('.devsite-search-field').fill('automate beyond recorder');
-await page.locator('.devsite-result-item-link').click();
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
 
-const textSelector = await page.locator('text/Customize and automate').waitHandle();
-const fullTitle = await textSelector?.evaluate(el => el.textContent);
+    await page.goto('https://www.php.net/docs.php');
+    await page.setViewport({width: 1080, height: 1024});
+    await page.locator('.navbar__search-button').click();
+    await page.locator('.search-modal__input').fill('string');
+    await page.waitForSelector('.search-modal__result-content');
+    await page.locator('#search-modal__result-name-0').click();
 
-console.log('The title of this blog post is "%s".', fullTitle);
+    const textSelector = await page.locator('text/String Oper').waitHandle();
+    const fullTitle = await textSelector?.evaluate(el => el.textContent);
+    console.log('The title of the blog post is: ' + fullTitle);
 
-await browser.close();
+    await browser.close();
+}
+
+main();
