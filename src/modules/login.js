@@ -1,9 +1,9 @@
 const puppeteer = require('puppeteer');
-const sleep = require('./../utils/helpers.js');
+const sleep = require('../utils/helpers.js');
 
 async function redditLogin(page) {
     await page.goto('https://www.reddit.com/login/', {waitUntil: 'domcontentloaded'});
-    console.info('Successfully reached reddit');
+    console.log('Successfully reached reddit');
 
     // Puppeeteer is unable to see the input for username / password so key presses are used to navigate and enter login info.
     for (let i = 0; i < 6; i++) {
@@ -25,6 +25,7 @@ async function redditLogin(page) {
 
     await page.keyboard.press('Enter');
     await page.waitForNavigation({ waitUntil: 'networkidle0' });
+    console.log('Successfully logged in to Reddit');
 }
 
 module.exports = {redditLogin};

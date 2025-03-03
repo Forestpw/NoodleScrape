@@ -1,6 +1,6 @@
 const puppeteer = require('puppeteer');
 const { overrideConsoleLog } = require('./utils/logger.js');
-const { redditLogin } = require('./modules/auth.js');
+const { redditLogin } = require('./modules/login.js');
 const sleep = require('./utils/helpers.js');
 require('dotenv').config();
 
