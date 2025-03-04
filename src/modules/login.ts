@@ -1,4 +1,5 @@
 import { sleep } from '../utils/helpers';
+import { randomNumber } from '../utils/helpers';
 
 export async function redditLogin(page: any) {
     const username = process.env.REDDIT_USERNAME as string;
@@ -15,14 +16,14 @@ export async function redditLogin(page: any) {
     
     for (let char of username) {
         await page.keyboard.press(char);
-        await sleep(200);
+        await sleep(randomNumber(150, 250));
     }
 
     await page.keyboard.press('Tab');
 
     for (let char of password) {
         await page.keyboard.press(char);
-        await sleep(200);
+        await sleep(randomNumber(150, 250));
     }
 
     await page.keyboard.press('Enter');
