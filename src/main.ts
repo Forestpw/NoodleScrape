@@ -1,7 +1,7 @@
-const puppeteer = require('puppeteer');
-const { overrideConsoleLog } = require('./utils/logger.js');
-const { redditLogin } = require('./modules/login.js');
-const sleep = require('./utils/helpers.js');
+import puppeteer from 'puppeteer';
+import { overrideConsoleLog } from './utils/logger';
+import { redditLogin } from './modules/login';
+import { sleep } from './utils/helpers';
 require('dotenv').config();
 
 async function main() {
@@ -13,7 +13,6 @@ async function main() {
 
     await redditLogin(page);
     await sleep(2500);
-    console.info('Successfully logged in!');
 
     await browser.close();
 }

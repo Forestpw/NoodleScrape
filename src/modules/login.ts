@@ -1,7 +1,9 @@
-const puppeteer = require('puppeteer');
-const sleep = require('../utils/helpers.js');
+import { sleep } from '../utils/helpers';
 
-async function redditLogin(page) {
+export async function redditLogin(page: any) {
+    const username = process.env.REDDIT_USERNAME as string;
+    const password = process.env.REDDIT_PASSWORD as string;
+
     await page.goto('https://www.reddit.com/login/', {waitUntil: 'domcontentloaded'});
     console.log('Successfully reached reddit');
 
@@ -11,14 +13,14 @@ async function redditLogin(page) {
         await sleep(400);
     }
     
-    for (let char of process.env.REDDIT_USERNAME) {
+    for (let char of username) {
         await page.keyboard.press(char);
         await sleep(200);
     }
 
     await page.keyboard.press('Tab');
 
-    for (let char of process.env.REDDIT_PASSWORD) {
+    for (let char of password) {
         await page.keyboard.press(char);
         await sleep(200);
     }
@@ -27,5 +29,3 @@ async function redditLogin(page) {
     await page.waitForNavigation({ waitUntil: 'networkidle0' });
     console.log('Successfully logged in to Reddit');
 }
-
-module.exports = {redditLogin};
