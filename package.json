@@ -4,7 +4,9 @@
     "cheerio": "^1.0.0",
     "dotenv": "^16.4.7",
     "nvm": "^0.0.4",
-    "puppeteer": "^24.3.0",
+    "puppeteer": "^24.4.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
     "sqlite": "^5.1.1",
     "sqlite3": "^5.1.7"
   },

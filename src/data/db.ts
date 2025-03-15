@@ -1,8 +1,7 @@
-// Handle DB interactions
 import Database from 'better-sqlite3';
 
 const db = new Database('noodle.db');
-console.log("Database connected Successfully");
+console.log("Database connection Successful");
 
 export function getNextPhrase(): string {
     try {

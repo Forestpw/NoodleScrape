@@ -11,7 +11,7 @@ export async function redditLogin(page: any) {
     // Puppeeteer is unable to see the input for username / password so key presses are used to navigate and enter login info.
     for (let i = 0; i < 6; i++) {
         await page.keyboard.press('Tab');
-        await sleep(400);
+        await sleep(600);
     }
     
     for (let char of username) {
