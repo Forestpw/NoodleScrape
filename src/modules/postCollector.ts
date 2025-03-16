@@ -7,7 +7,7 @@ export async function postCollector(page: any): Promise<string[]>  {
     const keywords = ['noodle', 'ramen', 'spaghetti', 'orzo', 'ravioli', 'linguine', 'macaroni',
                      'fettuccine', 'penne', 'ziti', 'lasagna', "mac and cheese", 'rigatoni', 'pasta'];
 
-    await page.goto('https://www.reddit.com/r/FoodPorn/', {waitUntil: 'domcontentloaded'});
+    await page.goto('https://www.reddit.com/r/FoodPorn/new/', {waitUntil: 'domcontentloaded'});
     console.log('Now browsing r/FoodPorn');
 
     await page.waitForSelector('shreddit-post');
