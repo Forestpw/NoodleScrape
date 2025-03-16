@@ -8,23 +8,19 @@ export async function redditLogin(page: any) {
     await page.goto('https://www.reddit.com/login/', {waitUntil: 'domcontentloaded'});
     console.log('Successfully reached reddit');
 
-    // Puppeeteer is unable to see the input for username / password so key presses are used to navigate and enter login info.
-    for (let i = 0; i < 6; i++) {
-        await page.keyboard.press('Tab');
-        await sleep(600);
-    }
-    
-    for (let char of username) {
-        await page.keyboard.press(char);
-        await sleep(randomNumber(150, 250));
-    }
+    // Locate username input within shadow dom and enter username.
+    let shadowHost = await page.waitForSelector('#login-username');
+    let shadowRoot = await page.evaluateHandle((element) => element.shadowRoot, shadowHost);
+    const usernameInput = await shadowRoot.$('input[name="username"]');
+    await usernameInput.type(username);
+    await sleep(1000);
 
-    await page.keyboard.press('Tab');
-
-    for (let char of password) {
-        await page.keyboard.press(char);
-        await sleep(randomNumber(150, 250));
-    }
+    // Locate password input within shadow dom and enter password.
+    shadowHost = await page.waitForSelector('#login-password');
+    shadowRoot = await page.evaluateHandle((element) => element.shadowRoot, shadowHost);
+    const passwordInput = await shadowRoot.$('input[name="password"]');
+    await passwordInput.type(password);
+    await sleep(1000);
 
     await page.keyboard.press('Enter');
     await page.waitForNavigation({ waitUntil: 'networkidle0' });
