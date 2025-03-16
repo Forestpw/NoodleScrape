@@ -26,10 +26,6 @@ export async function postCollector(page: any): Promise<string[]>  {
             }
         });
 
-        if (results.length >= targetCount ) {
-            break;
-        }
-
         previousHeight = await page.evaluate('document.body.scrollHeight');
         await page.evaluate('window.scrollTo(0, document.body.scrollHeight)');
 
